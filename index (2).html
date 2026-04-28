@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Customer Segmentation System</title>
+
+    <style>
+        body {
+            font-family: Arial;
+            background-color: #f4f4f4;
+            text-align: center;
+        }
+
+        header {
+            background: #2c3e50;
+            color: white;
+            padding: 15px;
+        }
+
+        .container {
+            background: white;
+            margin: 30px;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px gray;
+        }
+
+        input, select, button {
+            padding: 10px;
+            margin: 10px;
+        }
+
+        button {
+            background: #3498db;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+
+        #output {
+            margin-top: 20px;
+            padding: 15px;
+            background: #ecf0f1;
+        }
+    </style>
+</head>
+
+<body>
+
+<header>
+    <h1>Customer Segmentation for Targeted Marketing</h1>
+</header>
+
+<div class="container">
+
+    <h2>Enter Customer Details</h2>
+
+    <input type="number" id="age" placeholder="Age"><br>
+    <input type="number" id="income" placeholder="Annual Income"><br>
+    <input type="number" id="spending" placeholder="Spending Score (1-100)"><br>
+
+    <select id="gender">
+        <option value="">Select Gender</option>
+        <option value="Male">Male</option>
+        <option value="Female">Female</option>
+    </select><br>
+
+    <button onclick="segment()">Segment Customer</button>
+
+    <div id="output"></div>
+
+</div>
+
+<script>
+
+function segment() {
+
+    let age = document.getElementById("age").value;
+    let income = document.getElementById("income").value;
+    let spending = document.getElementById("spending").value;
+
+    if(age === "" || income === "" || spending === "") {
+        alert("Please fill all fields!");
+        return;
+    }
+
+    let segment = "";
+
+    // Segmentation Logic
+    if(income > 70000 && spending > 70) {
+        segment = "High Value Customer 💰 (Target with premium offers)";
+    }
+    else if(income > 70000 && spending < 40) {
+        segment = "Potential Customer 🔍 (Target with promotions)";
+    }
+    else if(income < 40000 && spending > 70) {
+        segment = "Careful Spender 🛒 (Target with discounts)";
+    }
+    else if(income < 40000 && spending < 40) {
+        segment = "Low Value Customer 📉 (Basic engagement)";
+    }
+    else {
+        segment = "Average Customer 🙂 (Regular marketing)";
+    }
+
+    document.getElementById("output").innerHTML =
+        "<h3>Customer Segment:</h3><p>" + segment + "</p>";
+}
+
+</script>
+
+</body>
+</html>
